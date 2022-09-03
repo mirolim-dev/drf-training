@@ -8,3 +8,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def sale_price(self):
+        return "%.2f" % (self.price + ((self.price / 100) * 15))
+
+    def get_discount(self):
+        return (self.price / 100) * 30
