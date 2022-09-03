@@ -1,6 +1,9 @@
-from rest_framework import serializers
+from rest_framework import serializers, generics
+
 
 from .models import Product
+from .serializers import ProductSerializer
+
 
 class ProductSerializer(serializers.ModelSerializer):
     discount = serializers.SerializerMethodField(read_only=True)
@@ -15,3 +18,11 @@ class ProductSerializer(serializers.ModelSerializer):
         if not isinstance(obj, Product):
             return None
         return obj.get_discount()
+    
+
+class ProductCreateApiView(generics.CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def perform_create(self, serializer):
+        return super().perform_create(serializer)
