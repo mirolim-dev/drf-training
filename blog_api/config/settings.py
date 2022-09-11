@@ -40,9 +40,24 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-
     'posts',
 ]
+
+# new
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#     'rest_framework.permissions.AllowAny',
+#     'rest_framework.permissions.IsAdminUser',
+#     )
+# }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+    'rest_framework.permissions.IsAuthenticated', # new
+    ]
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
